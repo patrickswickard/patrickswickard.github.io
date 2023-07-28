@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="mystyle.css">
+</head>
+<body>
+<h2><b>Poetry Analysis</b></h2>
+<P>
+<a href="https://github.com/patrickswickard/analyze_poem">link on github</a>
+<p>
+This project was partially inspired by a book of poetry I generated through a different project in which I took a book of poetry by Sylvia Plath and generated line-by-line anagrams of the poems for an imaginary poet named Latvia Sylph.  After writing this book I realized that it needed to be padded out with some introductory materials, and I thought it would be fun to turn some of the tools of data analysis onto the poems and compare the two "poets" in the service of attempting to resolve an imaginary authorship controversy between the two of them.  Although this is a somewhat silly impetus, it still provides some interesting tools for analyzing poetry.
+<p>
+I had a few of the tools for this in place from other projects.  I had a crude syllable-counting tool from a different project I did (searching for accidental haikus in various text sources).  I had some tools that had been written to do character breakdowns and counts from the initial Sylvia Plath anagram project.  And I had some more code snippets written for a mostly-unused branch of my Shakespeare sonnet project which would analyze stanza structure to try and identify if a poem was in proper sonnet format.  It seemed only natural to cobble some of these ideas together into a better structure to analyze a poetic work or body of works.
+<p>
+Obviously many of these tools exist already in various forms from different programs and repositories.  But I was particularly interested in being able to parse poems that are provided in a consistent format and rapidly generate statistics for comparison.
+<p>
+The tool that I produced with this code can be used by a user to analyze poems that are provided in a simple format, that is a title on one line (with an optional "dedicatee" line under it), followed by an empty line and then followed by the poem.  The tool processes all the information about the poem to a JSON file, including the content of the poem itself.  This includes such details as line count, word count, syllable count, average syllables per line, and even word frequency.  To see this in action, here is the JSON output for a translation of a Baudelaire poem, <a href="lalbatros.json">L'Albatros (The Albatross)</A>.
+<p>
+I am not including results here at this time, but I was immediately eager to tweak and turn this tool loose on longer works and complete corpuses of various poets.  For example, Baudelaire in particular has a lot of poems that have been translated multiple times by different translators, and sites such as <a href="https://fleursdumal.org/">https://fleursdumal.org/</a> make it trivial to download these translations in a form that can be easily turned into input for my tools.  This allows the user to easily compare different translations to see the word choices made by different translators translating the same source work.  If you compare two or more translations of the same work, it's possible to see at a glance where the translations differ in letter count, word count, syllable count, etc.  It also makes it obvious and quantifiable which translators have made radically different choices for how to translate the material, e.g. if they are more verbose or use unusual words that disagree with words used by other translators.
+<p>
+(The files I used to poke at Baudelaire's poetry in translation are sitting around in my repo, if anyone else feels inpired to do their own poking.)
+<p>
+One of the more fascinating metrics that fell out of this analysis is seeing for various poets if you look at a large body of their works how many unique words they use in their poetry and the frequencies with which those words are used.  Some poets repeat themselves a lot.  Some poets have a very large vocabulary.  It's interesting to compare which words a poet has used exactly once across the whole body of their work versus words they have used multiple times.  And again with even more semantic tweaking you can answer questions like "How often does Plath/Wordsworth/whoever mention different types of flowers in their works?"
+<p>
+As with many of my projects, this one is still evolving as I find inspiration to do new and better things with it.  Watch that space I suppose.
+<p>
+</body>
