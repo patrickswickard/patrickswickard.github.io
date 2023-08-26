@@ -5,6 +5,62 @@ import re
 def check_line(regex):
     return
 
+regex_hash = {}
+
+thiskey = 'title'
+thisvalue = ''
+thishash = {
+  'start_regex' : r"<title>[^<]*</title>",
+  'end_regex' : None,
+  'value' : None,
+}
+regex_hash[thiskey] = thishash
+
+thiskey = 'cover_image'
+thisvalue = ''
+thishash = {
+  'start_regex' : r"<img[^>]*src=\"[^\"]*\"",
+  'end_regex' : None,
+  'value' : None,
+}
+regex_hash[thiskey] = thishash
+
+thiskey = 'quote_list'
+thisvalue = ''
+thishash = {
+  'start_regex' : r"<I>",
+  'end_regex' : r"</I>",
+  'value' : None,
+}
+regex_hash[thiskey] = thishash
+
+thiskey = 'p_list'
+thisvalue = ''
+thishash = {
+  'start_regex' : r"<P>",
+  'end_regex' : r"</P>",
+  'value' : None,
+}
+regex_hash[thiskey] = thishash
+
+thiskey = 'includes_list'
+thisvalue = ''
+thishash = {
+  'start_regex' : r"<UL>",
+  'end_regex' : r"</UL>",
+  'value' : None,
+}
+regex_hash[thiskey] = thishash
+
+thiskey = 'sample_image'
+thisvalue = ''
+thishash = {
+  'start_regex' : r"<img[^>]*src=\"[^\"]*\"",
+  'end_regex' : None,
+  'value' : None,
+}
+regex_hash[thiskey] = thishash
+
 for i in range(10,51):
   file = 'ctr/ctr_0' + str(i) + '.html'
   with open(file) as fd:
