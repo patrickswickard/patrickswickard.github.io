@@ -1,0 +1,36 @@
+ALGORITHM:
+
+We know the order in which the page elements happen and these are all non-optional.  The order is set (and identical regex for some elements):
+
+title
+cover image
+quote
+keywords
+includes
+sample image
+
+If you've already extracted a value for something it won't happen twice, so no need to double-tap.  Once you've found something you no longer need to check for it but you may need to check for everything after it.
+
+So the list of values in order is necessary.
+
+One element may immediately follow another and it's possible that the start of one element may be the end of another.
+
+So for each line:
+  determine which fields we already have and skip unnecessary tests
+  see if it's the first line of something we haven't seen
+
+
+Is this basically a multi-line regex or more complicated?
+
+If it's a multi-line regex we *could* write this as a regex to slurp it down but this would be ugly.
+
+The whole possibly optional, one beginning could be another end, etc aspect of this suggests to treat it line by line and our output for each start/end pattern should be a list of lines that contain the data we care about.
+
+Also a one-liner could end on EOF...
+
+We then post-process those lines as appropriate.
+
+This is just the blob pass.
+
+For each value we're either in or out of extracting lines for that list.
+If IN
