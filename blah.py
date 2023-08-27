@@ -68,15 +68,9 @@ for i in range(10,51):
   file = 'ctr/ctr_0' + str(i) + '.html'
   with open(file) as fd:
     lines = fd.read().splitlines()
-    title = None
-    cover_image = None
     inquotesection = False
-    quotelist = None
     inpsection = False
-    plist = None
     inincludessection = False
-    includeslist = None
-    sample_page_image = None
     for thisline in lines:
       if regex_hash['title']['value'] == None:
         if thisline:
@@ -113,14 +107,13 @@ for i in range(10,51):
               inquotesection = True
               temp_quotelist = []
               continue
-      if regex_hash['p_list']['value'] == None:
+      if regex_hash['p_list']['value'] == None and not regex_hash['quote_list']['value'] == None:
         if inpsection:
           if thisline:
             this_end_regex = regex_hash['p_list']['end_regex']
             thisp = re.search(this_end_regex,thisline)
             if thisp:
               inpsection = False
-              #plist = temp_plist
               regex_hash['p_list']['value'] = temp_plist
               continue
             else:
@@ -134,7 +127,6 @@ for i in range(10,51):
               temp_plist = []
               continue
 
-      #if includeslist == None:
       if regex_hash['includes_list']['value'] == None:
         if inincludessection:
           if thisline:
@@ -143,7 +135,6 @@ for i in range(10,51):
             thisincludes = re.search(this_end_regex,thisline)
             if thisincludes:
               inincludessection = False
-              #includeslist = temp_includeslist
               regex_hash['includes_list']['value'] = temp_includeslist
               continue
             else:
@@ -156,26 +147,22 @@ for i in range(10,51):
               inincludessection = True
               temp_includeslist = []
               continue
-      if sample_page_image == None:
+      if regex_hash['sample_page_image']['value'] == None:
         if thisline:
           this_regex = regex_hash['sample_page_image']['start_regex']
           thissamp = re.search(this_regex,thisline)
           if thissamp:
-            sample_page_image = thissamp.group(1)
+            regex_hash['sample_page_image']['value'] = thissamp.group(1)
+
             continue
   print("*************")
-  #print(title)
   print(regex_hash['title']['value'])
-  #print(cover_image)
   print(regex_hash['cover_image']['value'])
-  print(sample_page_image)
+  print(regex_hash['sample_page_image']['value'])
   print("*************")
-  #print(plist)
   print("PLIST!!!")
   print(regex_hash['p_list']['value'])
   print("*************")
-  #print(includeslist)
   print(regex_hash['includes_list']['value'])
   print("*************")
-  #print(quotelist)
   print(regex_hash['quote_list']['value'])
