@@ -7,63 +7,63 @@ import re
 def check_line(regex):
     return
 
-regex_hash = {}
-
-thiskey = 'title'
-thisvalue = ''
-thishash = {
-  'start_regex' : r"<title>([^<]*)</title>",
-  'end_regex' : None,
-  'value' : None,
-}
-regex_hash[thiskey] = thishash
-
-thiskey = 'cover_image'
-thisvalue = ''
-thishash = {
-  'start_regex' : r"<img[^>]*src=\"([^\"]*)\"",
-  'end_regex' : None,
-  'value' : None,
-}
-regex_hash[thiskey] = thishash
-
-thiskey = 'quote_list'
-thisvalue = ''
-thishash = {
-  'start_regex' : r"<I>",
-  'end_regex' : r"</I>",
-  'value' : None,
-}
-regex_hash[thiskey] = thishash
-
-thiskey = 'p_list'
-thisvalue = ''
-thishash = {
-  'start_regex' : r"<P1>",
-  'end_regex' : r"<P2>",
-  'value' : None,
-}
-regex_hash[thiskey] = thishash
-
-thiskey = 'includes_list'
-thisvalue = ''
-thishash = {
-  'start_regex' : r"<UL>",
-  'end_regex' : r"</UL>",
-  'value' : None,
-}
-regex_hash[thiskey] = thishash
-
-thiskey = 'sample_page_image'
-thisvalue = ''
-thishash = {
-  'start_regex' : r"<img[^>]*src=\"([^\"]*)\"",
-  'end_regex' : None,
-  'value' : None,
-}
-regex_hash[thiskey] = thishash
-
 for i in range(10,51):
+  regex_hash = {}
+
+  thiskey = 'title'
+  thisvalue = ''
+  thishash = {
+    'start_regex' : r"<title>([^<]*)</title>",
+    'end_regex' : None,
+    'value' : None,
+  }
+  regex_hash[thiskey] = thishash
+
+  thiskey = 'cover_image'
+  thisvalue = ''
+  thishash = {
+    'start_regex' : r"<img[^>]*src=\"([^\"]*)\"",
+    'end_regex' : None,
+    'value' : None,
+  }
+  regex_hash[thiskey] = thishash
+
+  thiskey = 'quote_list'
+  thisvalue = ''
+  thishash = {
+    'start_regex' : r"<I>",
+    'end_regex' : r"</I>",
+    'value' : None,
+  }
+  regex_hash[thiskey] = thishash
+
+  thiskey = 'p_list'
+  thisvalue = ''
+  thishash = {
+    'start_regex' : r"<P>",
+    'end_regex' : r"<P>",
+    'value' : None,
+  }
+  regex_hash[thiskey] = thishash
+
+  thiskey = 'includes_list'
+  thisvalue = ''
+  thishash = {
+    'start_regex' : r"<UL>",
+    'end_regex' : r"</UL>",
+    'value' : None,
+  }
+  regex_hash[thiskey] = thishash
+
+  thiskey = 'sample_page_image'
+  thisvalue = ''
+  thishash = {
+    'start_regex' : r"<img[^>]*src=\"([^\"]*)\"",
+    'end_regex' : None,
+    'value' : None,
+  }
+  regex_hash[thiskey] = thishash
+
 #for i in range(50,51):
   file = 'ctr/ctr_0' + str(i) + '.html'
   with open(file) as fd:
@@ -78,28 +78,30 @@ for i in range(10,51):
     includeslist = None
     sample_page_image = None
     for thisline in lines:
-      if title == None:
+      if regex_hash['title']['value'] == None:
         if thisline:
           thisregex = regex_hash['title']['start_regex']
           thistitle = re.search(thisregex,thisline)
           if thistitle:
-            title = thisline
+            #title = thisline
+            regex_hash['title']['value'] = thisline
             continue
-      if cover_image == None:
+      if regex_hash['cover_image']['value'] == None:
         if thisline:
           thisregex = regex_hash['cover_image']['start_regex']
           thiscover = re.search(thisregex,thisline)
           if thiscover:
-            cover_image = thisline
+            #cover_image = thisline
+            regex_hash['cover_image']['value'] = thisline
             continue
-      if quotelist == None:
+      if regex_hash['quote_list']['value'] == None:
         if inquotesection:
           if thisline:
             this_end_regex = regex_hash['quote_list']['end_regex']
             thisquote = re.search(this_end_regex,thisline)
             if thisquote:
               inquotesection = False
-              quotelist = temp_quotelist
+              regex_hash['quote_list']['value'] = temp_quotelist
               continue
             else:
               temp_quotelist.append(thisline)
@@ -111,14 +113,15 @@ for i in range(10,51):
               inquotesection = True
               temp_quotelist = []
               continue
-      if plist == None:
+      if regex_hash['p_list']['value'] == None:
         if inpsection:
           if thisline:
             this_end_regex = regex_hash['p_list']['end_regex']
             thisp = re.search(this_end_regex,thisline)
             if thisp:
               inpsection = False
-              plist = temp_plist
+              #plist = temp_plist
+              regex_hash['p_list']['value'] = temp_plist
               continue
             else:
               temp_plist.append(thisline)
@@ -131,7 +134,8 @@ for i in range(10,51):
               temp_plist = []
               continue
 
-      if includeslist == None:
+      #if includeslist == None:
+      if regex_hash['includes_list']['value'] == None:
         if inincludessection:
           if thisline:
             this_end_regex = regex_hash['includes_list']['end_regex']
@@ -139,7 +143,8 @@ for i in range(10,51):
             thisincludes = re.search(this_end_regex,thisline)
             if thisincludes:
               inincludessection = False
-              includeslist = temp_includeslist
+              #includeslist = temp_includeslist
+              regex_hash['includes_list']['value'] = temp_includeslist
               continue
             else:
               temp_includeslist.append(thisline)
@@ -159,12 +164,18 @@ for i in range(10,51):
             sample_page_image = thissamp.group(1)
             continue
   print("*************")
-  print(title)
-  print(cover_image)
+  #print(title)
+  print(regex_hash['title']['value'])
+  #print(cover_image)
+  print(regex_hash['cover_image']['value'])
   print(sample_page_image)
   print("*************")
-  print(plist)
+  #print(plist)
+  print("PLIST!!!")
+  print(regex_hash['p_list']['value'])
   print("*************")
-  print(includeslist)
+  #print(includeslist)
+  print(regex_hash['includes_list']['value'])
   print("*************")
-  print(quotelist)
+  #print(quotelist)
+  print(regex_hash['quote_list']['value'])
