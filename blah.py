@@ -72,72 +72,79 @@ for i in range(10,51):
     inpsection = False
     inincludessection = False
     for thisline in lines:
-      if regex_hash['title']['value'] == None:
-        thisregex = regex_hash['title']['start_regex']
+      thisfield = 'title'
+      if regex_hash[thisfield]['value'] == None:
+        thisregex = regex_hash[thisfield]['start_regex']
         if re.search(thisregex,thisline):
-          regex_hash['title']['value'] = thisline
+          regex_hash[thisfield]['value'] = thisline
           continue
-      if regex_hash['cover_image']['value'] == None:
-        thisregex = regex_hash['cover_image']['start_regex']
+      thisfield = 'cover_image'
+      if regex_hash[thisfield]['value'] == None:
+        thisregex = regex_hash[thisfield]['start_regex']
         if re.search(thisregex,thisline):
-          regex_hash['cover_image']['value'] = thisline
+          regex_hash[thisfield]['value'] = thisline
           continue
-      if regex_hash['quote_list']['value'] == None:
+      thisfield = 'quote_list'
+      if regex_hash[thisfield]['value'] == None:
         if inquotesection:
-          this_end_regex = regex_hash['quote_list']['end_regex']
+          this_end_regex = regex_hash[thisfield]['end_regex']
           thisquote = re.search(this_end_regex,thisline)
           if thisquote:
             inquotesection = False
-            regex_hash['quote_list']['value'] = temp_quotelist
+            regex_hash[thisfield]['value'] = temp_quotelist
             continue
           else:
             temp_quotelist.append(thisline)
         if not inquotesection:
-          this_start_regex = regex_hash['quote_list']['start_regex']
+          this_start_regex = regex_hash[thisfield]['start_regex']
           thisquote = re.search(this_start_regex,thisline)
           if thisquote:
             inquotesection = True
             temp_quotelist = []
             continue
-      if regex_hash['p_list']['value'] == None and not regex_hash['quote_list']['value'] == None:
+      thisfield = 'p_list'
+      previousfield = 'quote_list'
+      if regex_hash[thisfield]['value'] == None and not regex_hash[previousfield]['value'] == None:
         if inpsection:
-          this_end_regex = regex_hash['p_list']['end_regex']
+          this_end_regex = regex_hash[thisfield]['end_regex']
           thisp = re.search(this_end_regex,thisline)
           if thisp:
             inpsection = False
-            regex_hash['p_list']['value'] = temp_plist
+            regex_hash[thisfield]['value'] = temp_plist
             continue
           else:
             temp_plist.append(thisline)
         if not inpsection:
-          this_start_regex = regex_hash['p_list']['start_regex']
+          this_start_regex = regex_hash[thisfield]['start_regex']
           thisp = re.search(this_start_regex,thisline)
           if thisp:
             inpsection = True
             temp_plist = []
             continue
-      if regex_hash['includes_list']['value'] == None:
+      thisfield = 'includes_list'
+      if regex_hash[thisfield]['value'] == None:
         if inincludessection:
-          this_end_regex = regex_hash['includes_list']['end_regex']
+          this_end_regex = regex_hash[thisfield]['end_regex']
           thisp = re.search(this_end_regex,thisline)
           thisincludes = re.search(this_end_regex,thisline)
           if thisincludes:
             inincludessection = False
-            regex_hash['includes_list']['value'] = temp_includeslist
+            regex_hash[thisfield]['value'] = temp_includeslist
             continue
           else:
             temp_includeslist.append(thisline)
         if not inincludessection:
-          this_start_regex = regex_hash['includes_list']['start_regex']
+          this_start_regex = regex_hash[thisfield]['start_regex']
           thisincludessection = re.search(this_start_regex,thisline)
           if thisincludessection:
             inincludessection = True
             temp_includeslist = []
             continue
-      if regex_hash['sample_page_image']['value'] == None:
-        this_regex = regex_hash['sample_page_image']['start_regex']
+      thisfield = 'sample_page_image'
+      if regex_hash[thisfield]['value'] == None:
+        this_regex = regex_hash[thisfield]['start_regex']
         if re.search(this_regex,thisline):
-          regex_hash['sample_page_image']['value'] = thisline
+          regex_hash[thisfield]['value'] = thisline
           continue
   print("*************")
   print(regex_hash['title']['value'])
