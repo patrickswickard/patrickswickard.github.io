@@ -74,14 +74,12 @@ for i in range(10,51):
     for thisline in lines:
       if regex_hash['title']['value'] == None:
         thisregex = regex_hash['title']['start_regex']
-        thisval = re.search(thisregex,thisline)
-        if thisval:
+        if re.search(thisregex,thisline):
           regex_hash['title']['value'] = thisline
           continue
       if regex_hash['cover_image']['value'] == None:
         thisregex = regex_hash['cover_image']['start_regex']
-        thisval = re.search(thisregex,thisline)
-        if thisval:
+        if re.search(thisregex,thisline):
           regex_hash['cover_image']['value'] = thisline
           continue
       if regex_hash['quote_list']['value'] == None:
@@ -118,7 +116,6 @@ for i in range(10,51):
             inpsection = True
             temp_plist = []
             continue
-
       if regex_hash['includes_list']['value'] == None:
         if inincludessection:
           this_end_regex = regex_hash['includes_list']['end_regex']
@@ -139,8 +136,7 @@ for i in range(10,51):
             continue
       if regex_hash['sample_page_image']['value'] == None:
         this_regex = regex_hash['sample_page_image']['start_regex']
-        thisval = re.search(this_regex,thisline)
-        if thisval:
+        if re.search(this_regex,thisline):
           regex_hash['sample_page_image']['value'] = thisline
           continue
   print("*************")
