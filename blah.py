@@ -12,6 +12,8 @@ def blarf(thisfield):
     if regex_hash[thisfield]['value'] == None:
       thisregex = regex_hash[thisfield]['start_regex']
       if re.search(thisregex,thisline):
+        regex_hash[thisfield]['in_section'] = True
+        regex_hash[thisfield]['in_section'] = False
         regex_hash[thisfield]['value'] = thisline
         #continue
         return thisline
