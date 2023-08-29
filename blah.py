@@ -8,6 +8,9 @@ def check_line(regex):
     return
 
 def blarf(thisfield):
+  for prereq in regex_hash[thisfield]['prerequisites']:
+    if regex_hash[prereq]['value'] == None:
+      return False
   if regex_hash[thisfield]['end_regex'] == None:
     if regex_hash[thisfield]['value'] == None:
       thisregex = regex_hash[thisfield]['start_regex']
@@ -50,6 +53,7 @@ for i in range(10,51):
     'value' : None,
     'in_section' : False,
     'temp_list' : [],
+    'prerequisites' : [],
   }
   regex_hash[thiskey] = thishash
 
@@ -61,6 +65,7 @@ for i in range(10,51):
     'value' : None,
     'in_section' : False,
     'temp_list' : [],
+    'prerequisites' : [],
   }
   regex_hash[thiskey] = thishash
 
@@ -72,6 +77,7 @@ for i in range(10,51):
     'value' : None,
     'in_section' : False,
     'temp_list' : [],
+    'prerequisites' : [],
   }
   regex_hash[thiskey] = thishash
 
@@ -83,6 +89,7 @@ for i in range(10,51):
     'value' : None,
     'in_section' : False,
     'temp_list' : [],
+    'prerequisites' : ['quote_list'],
   }
   regex_hash[thiskey] = thishash
 
@@ -94,6 +101,7 @@ for i in range(10,51):
     'value' : None,
     'in_section' : False,
     'temp_list' : [],
+    'prerequisites' : [],
   }
   regex_hash[thiskey] = thishash
 
@@ -105,6 +113,7 @@ for i in range(10,51):
     'value' : None,
     'in_section' : False,
     'temp_list' : [],
+    'prerequisites' : [],
   }
   regex_hash[thiskey] = thishash
 
@@ -116,31 +125,20 @@ for i in range(10,51):
     regex_hash['p_list']['in_section'] = False
     inpsection = False
     regex_hash['includes_list']['in_section'] = False
+    field_list = [
+      'title',
+      'cover_image',
+      'quote_list',
+      'p_list',
+      'includes_list',
+      'sample_page_image',
+    ]
     for thisline in lines:
-      thisfield = 'title'
-      should_i_continue = blarf(thisfield)
-      if should_i_continue:
-        continue
-      thisfield = 'cover_image'
-      should_i_continue = blarf(thisfield)
-      if should_i_continue:
-        continue
-      thisfield = 'quote_list'
-      should_i_continue = blarf(thisfield)
-      if should_i_continue:
-        continue
-      thisfield = 'p_list'
-      previousfield = 'quote_list'
-      if not regex_hash[previousfield]['value'] == None:
+      should_i_continue = False
+      for thisfield in field_list:
         should_i_continue = blarf(thisfield)
         if should_i_continue:
           continue
-      thisfield = 'includes_list'
-      should_i_continue = blarf(thisfield)
-      if should_i_continue:
-        continue
-      thisfield = 'sample_page_image'
-      should_i_continue = blarf(thisfield)
       if should_i_continue:
         continue
   print("*************")
