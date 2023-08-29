@@ -13,8 +13,11 @@ def blarf(thisfield):
       thisregex = regex_hash[thisfield]['start_regex']
       if re.search(thisregex,thisline):
         regex_hash[thisfield]['in_section'] = True
+        temp_list = []
+        temp_list.append(thisline)
         regex_hash[thisfield]['in_section'] = False
-        regex_hash[thisfield]['value'] = thisline
+        regex_hash[thisfield]['value'] = temp_list
+        #regex_hash[thisfield]['value'] = thisline
         #continue
         return thisline
   else:
@@ -114,7 +117,11 @@ for i in range(10,51):
         if regex_hash[thisfield]['value'] == None:
           thisregex = regex_hash[thisfield]['start_regex']
           if re.search(thisregex,thisline):
-            regex_hash[thisfield]['value'] = thisline
+            regex_hash[thisfield]['in_section'] = True
+            temp_list = []
+            temp_list.append(thisline)
+            regex_hash[thisfield]['in_section'] = False
+            regex_hash[thisfield]['value'] = temp_list
             continue
       else:
         if regex_hash[thisfield]['value'] == None:
@@ -139,7 +146,11 @@ for i in range(10,51):
         if regex_hash[thisfield]['value'] == None:
           thisregex = regex_hash[thisfield]['start_regex']
           if re.search(thisregex,thisline):
-            regex_hash[thisfield]['value'] = thisline
+            regex_hash[thisfield]['in_section'] = True
+            temp_list = []
+            temp_list.append(thisline)
+            regex_hash[thisfield]['in_section'] = False
+            regex_hash[thisfield]['value'] = temp_list
             continue
       else:
         if regex_hash[thisfield]['value'] == None:
@@ -164,7 +175,11 @@ for i in range(10,51):
         if regex_hash[thisfield]['value'] == None:
           thisregex = regex_hash[thisfield]['start_regex']
           if re.search(thisregex,thisline):
-            regex_hash[thisfield]['value'] = thisline
+            regex_hash[thisfield]['in_section'] = True
+            temp_list = []
+            temp_list.append(thisline)
+            regex_hash[thisfield]['in_section'] = False
+            regex_hash[thisfield]['value'] = temp_list
             continue
       else:
         if regex_hash[thisfield]['value'] == None:
@@ -191,7 +206,11 @@ for i in range(10,51):
           if regex_hash[thisfield]['value'] == None:
             thisregex = regex_hash[thisfield]['start_regex']
             if re.search(thisregex,thisline):
-              regex_hash[thisfield]['value'] = thisline
+              regex_hash[thisfield]['in_section'] = True
+              temp_list = []
+              temp_list.append(thisline)
+              regex_hash[thisfield]['in_section'] = False
+              regex_hash[thisfield]['value'] = temp_list
               continue
         else:
           if regex_hash[thisfield]['value'] == None:
@@ -216,7 +235,11 @@ for i in range(10,51):
         if regex_hash[thisfield]['value'] == None:
           thisregex = regex_hash[thisfield]['start_regex']
           if re.search(thisregex,thisline):
-            regex_hash[thisfield]['value'] = thisline
+            regex_hash[thisfield]['in_section'] = True
+            temp_list = []
+            temp_list.append(thisline)
+            regex_hash[thisfield]['in_section'] = False
+            regex_hash[thisfield]['value'] = temp_list
             continue
       else:
         if regex_hash[thisfield]['value'] == None:
@@ -241,7 +264,11 @@ for i in range(10,51):
         if regex_hash[thisfield]['value'] == None:
           thisregex = regex_hash[thisfield]['start_regex']
           if re.search(thisregex,thisline):
-            regex_hash[thisfield]['value'] = thisline
+            regex_hash[thisfield]['in_section'] = True
+            temp_list = []
+            temp_list.append(thisline)
+            regex_hash[thisfield]['in_section'] = False
+            regex_hash[thisfield]['value'] = temp_list
             continue
       else:
         if regex_hash[thisfield]['value'] == None:
