@@ -4,9 +4,6 @@ import re
 
             #title = thistitle.group(1)
             
-def check_line(regex):
-    return
-
 def check_and_process_field(thisfield):
   # if we already found this field then we are NOT done
   # and we should check other fields
