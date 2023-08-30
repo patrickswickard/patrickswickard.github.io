@@ -119,20 +119,18 @@ for i in range(10,51):
 
 #for i in range(50,51):
   file = 'ctr/ctr_0' + str(i) + '.html'
+  field_list = [
+    'title',
+    'cover_image',
+    'quote_list',
+    'p_list',
+    'includes_list',
+    'sample_page_image',
+  ]
   with open(file) as fd:
     lines = fd.read().splitlines()
-    regex_hash['quote_list']['in_section'] = False
-    regex_hash['p_list']['in_section'] = False
-    inpsection = False
-    regex_hash['includes_list']['in_section'] = False
-    field_list = [
-      'title',
-      'cover_image',
-      'quote_list',
-      'p_list',
-      'includes_list',
-      'sample_page_image',
-    ]
+    for thisfield in field_list:
+      regex_hash[thisfield]['in_section'] = False
     for thisline in lines:
       should_i_continue = False
       for thisfield in field_list:
