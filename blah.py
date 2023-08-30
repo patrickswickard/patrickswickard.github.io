@@ -7,16 +7,6 @@ import re
 def check_line(regex):
     return
 
-# we done here?
-# we do this for each line and each field wrt to that line
-# if we return True from this method then we
-# are skipping trying to match start or end regexes
-# for other fields
-# and if we return False then we *are* trying other fields
-# because we're not done checking
-# some of this logic is inside-out due to hacking this together
-# and then refactoring
-# fixing the logic here will make this clearer
 def check_and_process_field(thisfield):
   # if we already found this field then we are NOT done
   # and we should check other fields
