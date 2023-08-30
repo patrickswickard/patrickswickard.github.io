@@ -156,16 +156,6 @@ for i in range(10,51):
     for thisline in lines:
       should_i_continue = False
       for thisfield in field_list:
-        # each line we try each field until blarf tells us not to
-        # all hail the wise all-knowing black box blarf
-        # blarf is wise and inscrutable
-        # blarf is the method that cannot be named
-        # MUST not be named
-        # we cannot speak blarf's purpose, we only know that it urges us onward
-        # to our destiny
-        # hail the great parser blarf!
-        # sacrifice a hecatomb on blarf's feast day
-        # so as not to lose blarf's favor
         # true means we skip checking rest of lines for this field
         # false means we keep going
         should_i_continue = blarf(thisfield)
