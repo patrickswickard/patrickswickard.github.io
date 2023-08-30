@@ -17,7 +17,7 @@ def check_line(regex):
 # some of this logic is inside-out due to hacking this together
 # and then refactoring
 # fixing the logic here will make this clearer
-def blarf(thisfield):
+def check_and_process_field(thisfield):
   # if we already found this field then we are NOT done
   # and we should check other fields
   if not regex_hash[thisfield]['value'] == None:
@@ -157,7 +157,7 @@ for i in range(10,51):
       for thisfield in field_list:
         # true means we skip checking rest of lines for this field
         # false means we keep going
-        should_i_skip_rest_of_fields_for_this_line = blarf(thisfield)
+        should_i_skip_rest_of_fields_for_this_line = check_and_process_field(thisfield)
         if should_i_skip_rest_of_fields_for_this_line:
           continue
       if should_i_skip_rest_of_fields_for_this_line:
