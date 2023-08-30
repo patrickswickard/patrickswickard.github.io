@@ -23,21 +23,13 @@ def check_and_process_field(thisfield):
   # check other fields that might match this line
   #for prereq in regex_hash[thisfield]['prerequisites']:
   for prereq in thisfield.prerequisites:
-#    if regex_hash[prereq]['value'] == None:
     if prereq.value == None:
       return False
   # we may only have one start_regex, i.e. a one-liner
   # if this matches this field we're done, otherwise we carry on
-#  if regex_hash[thisfield]['end_regex'] == None:
   if thisfield.end_regex == None:
-#    thisregex = regex_hash[thisfield]['start_regex']
     thisregex = thisfield.start_regex
     if re.search(thisregex,thisline):
-#      regex_hash[thisfield]['in_section'] = True
-#      regex_hash[thisfield]['temp_list'] = []
-#      regex_hash[thisfield]['temp_list'].append(thisline)
-#      regex_hash[thisfield]['in_section'] = False
-#      regex_hash[thisfield]['value'] = regex_hash[thisfield]['temp_list']
       thisfield.in_section = True
       thisfield.temp_list = []
       thisfield.temp_list.append(thisline)
@@ -49,29 +41,21 @@ def check_and_process_field(thisfield):
     # whether we are "in" the section and act accordingly
     # if we're inside the section then no reason to check other sections
     # so when done doing our "stuff" return true
-#    if regex_hash[thisfield]['in_section']:
     if thisfield.in_section:
-#      this_end_regex = regex_hash[thisfield]['end_regex']
       this_end_regex = thisfield.end_regex
       thisquote = re.search(this_end_regex,thisline)
       if thisquote:
-#        regex_hash[thisfield]['in_section'] = False
-#        regex_hash[thisfield]['value'] = regex_hash[thisfield]['temp_list']
         thisfield.in_section = False
         thisfield.value = thisfield.temp_list
       else:
-#        regex_hash[thisfield]['temp_list'].append(thisline)
         thisfield.temp_list.append(thisline)
       return True
     # if we're not in the section then we check to see
     # if we enter it and if we do then we don't care about
     # other fields so return true
-#    this_start_regex = regex_hash[thisfield]['start_regex']
     this_start_regex = thisfield.start_regex
     thisquote = re.search(this_start_regex,thisline)
     if thisquote:
-#      regex_hash[thisfield]['in_section'] = True
-#      regex_hash[thisfield]['temp_list'] = []
       thisfield.in_section = True
       thisfield.temp_list = []
       return True
@@ -79,19 +63,9 @@ def check_and_process_field(thisfield):
   return False
 
 for i in range(10,51):
-#  regex_hash = {}
   field_hash = {}
 
   thiskey = 'title'
-#  thisvalue = ''
-#  thishash = {
-#    'start_regex' : r"<title>[^<]*</title>",
-#    'end_regex' : None,
-#    'value' : None,
-#    'in_section' : False,
-#    'temp_list' : [],
-#    'prerequisites' : [],
-#  }
   thisfield = FieldSection(thiskey)
   thisfield.start_regex = r"<title>[^<]*</title>"
   thisfield.end_regex = None
@@ -99,19 +73,9 @@ for i in range(10,51):
   thisfield.in_section = False
   thisfield.temp_list = []
   thisfield.prerequisites = []
-#  regex_hash[thiskey] = thishash
   field_hash[thiskey] = thisfield
 
   thiskey = 'cover_image'
-#  thisvalue = ''
-#  thishash = {
-#    'start_regex' : r"<img[^>]*src=\"[^\"]*\"",
-#    'end_regex' : None,
-#    'value' : None,
-#    'in_section' : False,
-#    'temp_list' : [],
-#    'prerequisites' : [],
-#  }
   thisfield = FieldSection(thiskey)
   thisfield.start_regex = r"<img[^>]*src=\"[^\"]*\""
   thisfield.end_regex = None
@@ -119,19 +83,9 @@ for i in range(10,51):
   thisfield.in_section = False
   thisfield.temp_list = []
   thisfield.prerequisites = []
-  #regex_hash[thiskey] = thishash
   field_hash[thiskey] = thisfield
 
   thiskey = 'quote_list'
-#  thisvalue = ''
-#  thishash = {
-#    'start_regex' : r"<I>",
-#    'end_regex' : r"</I>",
-#    'value' : None,
-#    'in_section' : False,
-#    'temp_list' : [],
-#    'prerequisites' : [],
-#  }
   thisfield = FieldSection(thiskey)
   thisfield.start_regex = r"<I>"
   thisfield.end_regex = r"</I>"
@@ -139,19 +93,9 @@ for i in range(10,51):
   thisfield.in_section = False
   thisfield.temp_list = []
   thisfield.prerequisites = []
-  #regex_hash[thiskey] = thishash
   field_hash[thiskey] = thisfield
 
   thiskey = 'p_list'
-#  thisvalue = ''
-#  thishash = {
-#    'start_regex' : r"<P>",
-#    'end_regex' : r"<P>",
-#    'value' : None,
-#    'in_section' : False,
-#    'temp_list' : [],
-#    'prerequisites' : ['quote_list'],
-#  }
   thisfield = FieldSection(thiskey)
   thisfield.start_regex = r"<P>"
   thisfield.end_regex = r"<P>"
@@ -159,19 +103,9 @@ for i in range(10,51):
   thisfield.in_section = False
   thisfield.temp_list = []
   thisfield.prerequisites = [field_hash['quote_list']]
-  #regex_hash[thiskey] = thishash
   field_hash[thiskey] = thisfield
 
   thiskey = 'includes_list'
-#  thisvalue = ''
-#  thishash = {
-#    'start_regex' : r"<UL>",
-#    'end_regex' : r"</UL>",
-#    'value' : None,
-#    'in_section' : False,
-#    'temp_list' : [],
-#    'prerequisites' : [],
-#  }
   thisfield = FieldSection(thiskey)
   thisfield.start_regex = r"<UL>"
   thisfield.end_regex = r"</UL>"
@@ -179,19 +113,9 @@ for i in range(10,51):
   thisfield.in_section = False
   thisfield.temp_list = []
   thisfield.prerequisites = []
-#  regex_hash[thiskey] = thishash
   field_hash[thiskey] = thisfield
 
   thiskey = 'sample_page_image'
-#  thisvalue = ''
-#  thishash = {
-#    'start_regex' : r"<img[^>]*src=\"[^\"]*\"",
-#    'end_regex' : None,
-#    'value' : None,
-#    'in_section' : False,
-#    'temp_list' : [],
-#    'prerequisites' : [],
-#  }
   thisfield = FieldSection(thiskey)
   thisfield.start_regex = r"<img[^>]*src=\"[^\"]*\""
   thisfield.end_regex = None
@@ -199,7 +123,6 @@ for i in range(10,51):
   thisfield.in_section = False
   thisfield.temp_list = []
   thisfield.prerequisites = []
-#  regex_hash[thiskey] = thishash
   field_hash[thiskey] = thisfield
 
 #for i in range(50,51):
@@ -218,7 +141,6 @@ for i in range(10,51):
   with open(file) as fd:
     lines = fd.read().splitlines()
     for thisfield in field_list:
-#      regex_hash[thisfield]['in_section'] = False
       thisfield.in_section = False
     for thisline in lines:
       for thisfield in field_list:
@@ -230,19 +152,13 @@ for i in range(10,51):
       if should_i_skip_rest_of_fields_for_this_line:
         continue
   print("*************")
-#  print(regex_hash['title']['value'])
-#  print(regex_hash['cover_image']['value'])
-#  print(regex_hash['sample_page_image']['value'])
   print(field_hash['title'].value)
   print(field_hash['cover_image'].value)
   print(field_hash['sample_page_image'].value)
   print("*************")
   print("PLIST!!!")
-#  print(regex_hash['p_list']['value'])
   print(field_hash['p_list'].value)
   print("*************")
-#  print(regex_hash['includes_list']['value'])
   print(field_hash['includes_list'].value)
   print("*************")
-#  print(regex_hash['quote_list']['value'])
   print(field_hash['quote_list'].value)
