@@ -7,39 +7,61 @@ import re
 def check_line(regex):
     return
 
+# we done here?
+# we do this for each line and each field wrt to that line
+# if we return True from this method then we
+# are skipping trying to match start or end regexes
+# for other fields
+# and if we return False then we *are* trying other fields
+# because we're not done checking
+# some of this logic is inside-out due to hacking this together
+# and then refactoring
+# fixing the logic here will make this clearer
 def blarf(thisfield):
+  # if we already found this field then we are NOT done
+  # and we should check other fields
+  if not regex_hash[thisfield]['value'] == None:
+    return False
+  # if prerequisites for this field are not met we should
+  # check other fields that might match this line
   for prereq in regex_hash[thisfield]['prerequisites']:
     if regex_hash[prereq]['value'] == None:
       return False
+  # we may only have one start_regex, i.e. a one-liner
+  # if this matches this field we're done, otherwise we carry on
   if regex_hash[thisfield]['end_regex'] == None:
-    if regex_hash[thisfield]['value'] == None:
-      thisregex = regex_hash[thisfield]['start_regex']
-      if re.search(thisregex,thisline):
-        regex_hash[thisfield]['in_section'] = True
-        regex_hash[thisfield]['temp_list'] = []
-        regex_hash[thisfield]['temp_list'].append(thisline)
+    thisregex = regex_hash[thisfield]['start_regex']
+    if re.search(thisregex,thisline):
+      regex_hash[thisfield]['in_section'] = True
+      regex_hash[thisfield]['temp_list'] = []
+      regex_hash[thisfield]['temp_list'].append(thisline)
+      regex_hash[thisfield]['in_section'] = False
+      regex_hash[thisfield]['value'] = regex_hash[thisfield]['temp_list']
+      return True
+  else:
+    # if we have a start and end regex then we have to care
+    # whether we are "in" the section and act accordingly
+    # if we're inside the section then no reason to check other sections
+    # so when done doing our "stuff" return true
+    if regex_hash[thisfield]['in_section']:
+      this_end_regex = regex_hash[thisfield]['end_regex']
+      thisquote = re.search(this_end_regex,thisline)
+      if thisquote:
         regex_hash[thisfield]['in_section'] = False
         regex_hash[thisfield]['value'] = regex_hash[thisfield]['temp_list']
-        return True
-  else:
-    if regex_hash[thisfield]['value'] == None:
-      if regex_hash[thisfield]['in_section']:
-        this_end_regex = regex_hash[thisfield]['end_regex']
-        thisquote = re.search(this_end_regex,thisline)
-        if thisquote:
-          regex_hash[thisfield]['in_section'] = False
-          regex_hash[thisfield]['value'] = regex_hash[thisfield]['temp_list']
-          return True
-        else:
-          regex_hash[thisfield]['temp_list'].append(thisline)
-          return True
-      if not regex_hash[thisfield]['in_section']:
-        this_start_regex = regex_hash[thisfield]['start_regex']
-        thisquote = re.search(this_start_regex,thisline)
-        if thisquote:
-          regex_hash[thisfield]['in_section'] = True
-          regex_hash[thisfield]['temp_list'] = []
-          return True
+      else:
+        regex_hash[thisfield]['temp_list'].append(thisline)
+      return True
+    # if we're not in the section then we check to see
+    # if we enter it and if we do then we don't care about
+    # other fields so return true
+    this_start_regex = regex_hash[thisfield]['start_regex']
+    thisquote = re.search(this_start_regex,thisline)
+    if thisquote:
+      regex_hash[thisfield]['in_section'] = True
+      regex_hash[thisfield]['temp_list'] = []
+      return True
+  # at this point nothing matched so keep trying other fields
   return False
 
 for i in range(10,51):
@@ -144,6 +166,8 @@ for i in range(10,51):
         # hail the great parser blarf!
         # sacrifice a hecatomb on blarf's feast day
         # so as not to lose blarf's favor
+        # true means we skip checking rest of lines for this field
+        # false means we keep going
         should_i_continue = blarf(thisfield)
         if should_i_continue:
           continue
