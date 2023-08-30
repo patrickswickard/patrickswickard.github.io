@@ -1,8 +1,5 @@
 import re
-#for i in range(1,10):
-#  file = 'ctr/ctr_00' + str(i) + '.html'
 
-            #title = thistitle.group(1)
 class FieldSection:
   def __init__(self,fieldname):
     self.fieldname = fieldname
@@ -13,56 +10,58 @@ class FieldSection:
     self.temp_list = []
     self.prerequisites = []
 
-def check_and_process_field(thisfield):
-  # if we already found this field then we are NOT done
-  # and we should check other fields
-  #if not regex_hash[thisfield]['value'] == None:
-  if not thisfield.value == None:
-    return False
-  # if prerequisites for this field are not met we should
-  # check other fields that might match this line
-  #for prereq in regex_hash[thisfield]['prerequisites']:
-  for prereq in thisfield.prerequisites:
-    if prereq.value == None:
+  def check_and_process_field(self):
+    # if we already found this field then we are NOT done
+    # and we should check other fields
+    if not self.value == None:
       return False
-  # we may only have one start_regex, i.e. a one-liner
-  # if this matches this field we're done, otherwise we carry on
-  if thisfield.end_regex == None:
-    thisregex = thisfield.start_regex
-    if re.search(thisregex,thisline):
-      thisfield.in_section = True
-      thisfield.temp_list = []
-      thisfield.temp_list.append(thisline)
-      thisfield.in_section = False
-      thisfield.value = thisfield.temp_list
-      return True
-  else:
-    # if we have a start and end regex then we have to care
-    # whether we are "in" the section and act accordingly
-    # if we're inside the section then no reason to check other sections
-    # so when done doing our "stuff" return true
-    if thisfield.in_section:
-      this_end_regex = thisfield.end_regex
-      thisquote = re.search(this_end_regex,thisline)
+    # if prerequisites for this field are not met we should
+    # check other fields that might match this line
+    for prereq in self.prerequisites:
+      if prereq.value == None:
+        return False
+    # we may only have one start_regex, i.e. a one-liner
+    # if this matches this field we're done, otherwise we carry on
+    if self.end_regex == None:
+      thisregex = self.start_regex
+      if re.search(thisregex,thisline):
+        self.in_section = True
+        self.temp_list = []
+        self.temp_list.append(thisline)
+        self.in_section = False
+        self.value = self.temp_list
+        return True
+    else:
+      # if we have a start and end regex then we have to care
+      # whether we are "in" the section and act accordingly
+      # if we're inside the section then no reason to check other sections
+      # so when done doing our "stuff" return true
+      if self.in_section:
+        this_end_regex = self.end_regex
+        thisquote = re.search(this_end_regex,thisline)
+        if thisquote:
+          self.in_section = False
+          self.value = thisfield.temp_list
+        else:
+          self.temp_list.append(thisline)
+        return True
+      # if we're not in the section then we check to see
+      # if we enter it and if we do then we don't care about
+      # other fields so return true
+      this_start_regex = self.start_regex
+      thisquote = re.search(this_start_regex,thisline)
       if thisquote:
-        thisfield.in_section = False
-        thisfield.value = thisfield.temp_list
-      else:
-        thisfield.temp_list.append(thisline)
-      return True
-    # if we're not in the section then we check to see
-    # if we enter it and if we do then we don't care about
-    # other fields so return true
-    this_start_regex = thisfield.start_regex
-    thisquote = re.search(this_start_regex,thisline)
-    if thisquote:
-      thisfield.in_section = True
-      thisfield.temp_list = []
-      return True
-  # at this point nothing matched so keep trying other fields
-  return False
+        self.in_section = True
+        self.temp_list = []
+        return True
+    # at this point nothing matched so keep trying other fields
+    return False
 
-for i in range(10,51):
+for i in range(1,51):
+  if i <= 9:
+    file = 'ctr/ctr_00' + str(i) + '.html'
+  else:
+    file = 'ctr/ctr_0' + str(i) + '.html'
   field_hash = {}
 
   thiskey = 'title'
@@ -102,8 +101,6 @@ for i in range(10,51):
   thisfield.end_regex = None
   field_hash[thiskey] = thisfield
 
-#for i in range(50,51):
-  file = 'ctr/ctr_0' + str(i) + '.html'
   fieldname_list = [
     'title',
     'cover_image',
@@ -123,7 +120,8 @@ for i in range(10,51):
       for thisfield in field_list:
         # true means we skip checking rest of lines for this field
         # false means we keep going
-        should_i_skip_rest_of_fields_for_this_line = check_and_process_field(thisfield)
+#        should_i_skip_rest_of_fields_for_this_line = check_and_process_field(thisfield)
+        should_i_skip_rest_of_fields_for_this_line = thisfield.check_and_process_field()
         if should_i_skip_rest_of_fields_for_this_line:
           break
       if should_i_skip_rest_of_fields_for_this_line:
