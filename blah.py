@@ -52,11 +52,9 @@ class FieldSection:
     # at this point nothing matched so keep trying other fields
     return False
 
-for i in range(1,51):
-  if i <= 9:
-    file = 'ctr/ctr_00' + str(i) + '.html'
-  else:
-    file = 'ctr/ctr_0' + str(i) + '.html'
+###################################
+
+def init_field_hash():
   field_hash = {}
 
   thiskey = 'title'
@@ -96,6 +94,10 @@ for i in range(1,51):
   thisfield.end_regex = None
   field_hash[thiskey] = thisfield
 
+  return field_hash
+
+def init_field_list():
+  field_hash = init_field_hash()
   fieldname_list = [
     'title',
     'cover_image',
@@ -107,10 +109,18 @@ for i in range(1,51):
   field_list = []
   for fieldname in fieldname_list:
     field_list.append(field_hash[fieldname])
+  return field_list
+
+for i in range(1,51):
+  if i <= 9:
+    file = 'ctr/ctr_00' + str(i) + '.html'
+  else:
+    file = 'ctr/ctr_0' + str(i) + '.html'
+
+  field_list = init_field_list()
+
   with open(file) as fd:
     lines = fd.read().splitlines()
-    for thisfield in field_list:
-      thisfield.in_section = False
     for thisline in lines:
       for thisfield in field_list:
         # true means we skip checking rest of lines for this field
@@ -121,13 +131,7 @@ for i in range(1,51):
       if should_i_skip_rest_of_fields_for_this_line:
         continue
   print("*************")
-  print(field_hash['title'].value)
-  print(field_hash['cover_image'].value)
-  print(field_hash['sample_page_image'].value)
-  print("*************")
-  print("PLIST!!!")
-  print(field_hash['p_list'].value)
-  print("*************")
-  print(field_hash['includes_list'].value)
-  print("*************")
-  print(field_hash['quote_list'].value)
+  for thisfield in field_list:
+    print(thisfield.fieldname)
+    print(thisfield.value)
+    print("*************")
