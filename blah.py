@@ -158,10 +158,10 @@ for i in range(10,51):
       for thisfield in field_list:
         # true means we skip checking rest of lines for this field
         # false means we keep going
-        should_i_continue = blarf(thisfield)
-        if should_i_continue:
+        should_i_skip_rest_of_fields_for_this_line = blarf(thisfield)
+        if should_i_skip_rest_of_fields_for_this_line:
           continue
-      if should_i_continue:
+      if should_i_skip_rest_of_fields_for_this_line:
         continue
   print("*************")
   print(regex_hash['title']['value'])
