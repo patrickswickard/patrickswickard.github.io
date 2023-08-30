@@ -69,39 +69,24 @@ for i in range(10,51):
   thisfield = FieldSection(thiskey)
   thisfield.start_regex = r"<title>[^<]*</title>"
   thisfield.end_regex = None
-  thisfield.value = None
-  thisfield.in_section = False
-  thisfield.temp_list = []
-  thisfield.prerequisites = []
   field_hash[thiskey] = thisfield
 
   thiskey = 'cover_image'
   thisfield = FieldSection(thiskey)
   thisfield.start_regex = r"<img[^>]*src=\"[^\"]*\""
   thisfield.end_regex = None
-  thisfield.value = None
-  thisfield.in_section = False
-  thisfield.temp_list = []
-  thisfield.prerequisites = []
   field_hash[thiskey] = thisfield
 
   thiskey = 'quote_list'
   thisfield = FieldSection(thiskey)
   thisfield.start_regex = r"<I>"
   thisfield.end_regex = r"</I>"
-  thisfield.value = None
-  thisfield.in_section = False
-  thisfield.temp_list = []
-  thisfield.prerequisites = []
   field_hash[thiskey] = thisfield
 
   thiskey = 'p_list'
   thisfield = FieldSection(thiskey)
   thisfield.start_regex = r"<P>"
   thisfield.end_regex = r"<P>"
-  thisfield.value = None
-  thisfield.in_section = False
-  thisfield.temp_list = []
   thisfield.prerequisites = [field_hash['quote_list']]
   field_hash[thiskey] = thisfield
 
@@ -109,20 +94,12 @@ for i in range(10,51):
   thisfield = FieldSection(thiskey)
   thisfield.start_regex = r"<UL>"
   thisfield.end_regex = r"</UL>"
-  thisfield.value = None
-  thisfield.in_section = False
-  thisfield.temp_list = []
-  thisfield.prerequisites = []
   field_hash[thiskey] = thisfield
 
   thiskey = 'sample_page_image'
   thisfield = FieldSection(thiskey)
   thisfield.start_regex = r"<img[^>]*src=\"[^\"]*\""
   thisfield.end_regex = None
-  thisfield.value = None
-  thisfield.in_section = False
-  thisfield.temp_list = []
-  thisfield.prerequisites = []
   field_hash[thiskey] = thisfield
 
 #for i in range(50,51):
