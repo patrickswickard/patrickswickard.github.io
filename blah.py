@@ -3,7 +3,16 @@ import re
 #  file = 'ctr/ctr_00' + str(i) + '.html'
 
             #title = thistitle.group(1)
-            
+class FieldSection:
+  def __init__(self,fieldname):
+    self.fieldname = fieldname
+    self.start_regex = None
+    self.end_regex = None
+    self.value = None
+    self.in_section = False
+    self.temp_list = []
+    self.prerequisites = []
+
 def check_and_process_field(thisfield):
   # if we already found this field then we are NOT done
   # and we should check other fields
