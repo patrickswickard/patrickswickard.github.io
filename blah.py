@@ -154,7 +154,6 @@ for i in range(10,51):
     for thisfield in field_list:
       regex_hash[thisfield]['in_section'] = False
     for thisline in lines:
-      should_i_continue = False
       for thisfield in field_list:
         # true means we skip checking rest of lines for this field
         # false means we keep going
