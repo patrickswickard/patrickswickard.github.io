@@ -60,7 +60,7 @@ for i in range(10,51):
   thiskey = 'title'
   thisvalue = ''
   thishash = {
-    'start_regex' : r"<title>([^<]*)</title>",
+    'start_regex' : r"<title>[^<]*</title>",
     'end_regex' : None,
     'value' : None,
     'in_section' : False,
@@ -72,7 +72,7 @@ for i in range(10,51):
   thiskey = 'cover_image'
   thisvalue = ''
   thishash = {
-    'start_regex' : r"<img[^>]*src=\"([^\"]*)\"",
+    'start_regex' : r"<img[^>]*src=\"[^\"]*\"",
     'end_regex' : None,
     'value' : None,
     'in_section' : False,
@@ -120,7 +120,7 @@ for i in range(10,51):
   thiskey = 'sample_page_image'
   thisvalue = ''
   thishash = {
-    'start_regex' : r"<img[^>]*src=\"([^\"]*)\"",
+    'start_regex' : r"<img[^>]*src=\"[^\"]*\"",
     'end_regex' : None,
     'value' : None,
     'in_section' : False,
