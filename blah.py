@@ -23,8 +23,7 @@ class FieldSection:
     # we may only have one start_regex, i.e. a one-liner
     # if this matches this field we're done, otherwise we carry on
     if self.end_regex == None:
-      thisregex = self.start_regex
-      if re.search(thisregex,thisline):
+      if re.search(self.start_regex,thisline):
         self.in_section = True
         self.temp_list = []
         self.temp_list.append(thisline)
@@ -37,9 +36,7 @@ class FieldSection:
       # if we're inside the section then no reason to check other sections
       # so when done doing our "stuff" return true
       if self.in_section:
-        this_end_regex = self.end_regex
-        thisquote = re.search(this_end_regex,thisline)
-        if thisquote:
+        if re.search(self.end_regex,thisline):
           self.in_section = False
           self.value = thisfield.temp_list
         else:
@@ -48,9 +45,7 @@ class FieldSection:
       # if we're not in the section then we check to see
       # if we enter it and if we do then we don't care about
       # other fields so return true
-      this_start_regex = self.start_regex
-      thisquote = re.search(this_start_regex,thisline)
-      if thisquote:
+      if re.search(self.start_regex,thisline):
         self.in_section = True
         self.temp_list = []
         return True
@@ -120,7 +115,6 @@ for i in range(1,51):
       for thisfield in field_list:
         # true means we skip checking rest of lines for this field
         # false means we keep going
-#        should_i_skip_rest_of_fields_for_this_line = check_and_process_field(thisfield)
         should_i_skip_rest_of_fields_for_this_line = thisfield.check_and_process_field()
         if should_i_skip_rest_of_fields_for_this_line:
           break
