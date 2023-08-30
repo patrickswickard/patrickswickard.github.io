@@ -148,7 +148,7 @@ for i in range(10,51):
         # false means we keep going
         should_i_skip_rest_of_fields_for_this_line = check_and_process_field(thisfield)
         if should_i_skip_rest_of_fields_for_this_line:
-          continue
+          break
       if should_i_skip_rest_of_fields_for_this_line:
         continue
   print("*************")
