@@ -94,6 +94,10 @@ for i in range(1,51):
 #      if inner_value:
 #        print("inner value: " + inner_value.group(1))
 #    print("*************")
+
+
+# Back to being messy...
+# TODO p_list is hard to parse because links mixed in with non-links and not necessarily consistent for these pages at least.
   field_hash = {}
   for thisfield in field_list:
     field_hash[thisfield.fieldname] = thisfield
