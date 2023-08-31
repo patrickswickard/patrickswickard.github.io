@@ -121,7 +121,14 @@ for i in range(1,51):
   p_list_lines = field_hash['p_list'].value
   p_list_blob = ' '.join(p_list_lines)
   value = []
-  print(p_list_blob)
+  justlinks = re.findall(r"<a href=[^\"]*\"[^\"]*\"[^>]*>[^<]*</a>",p_list_blob,re.IGNORECASE)
+  for thislink in justlinks:
+    linevalue_regex = r"<(?:a|A)[^>]*(?:href|HREF)=\"(.*?)\"[^>]*>\s*(.*)\s*</(?:a|A)>"
+    linevalue = [re.search(linevalue_regex,thislink,re.IGNORECASE).group(1),re.search(linevalue_regex,thislink,re.IGNORECASE).group(2)]
+    #linevalue = [[re.search(linevalue_regex,thislink,re.IGNORECASE).group(1)]]
+    value.append(linevalue)
+  print(value)
+  #print(p_list_blob)
   includes_list_lines = field_hash['includes_list'].value
   includes_list_blob = ' '.join(includes_list_lines)
   value = []
