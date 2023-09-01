@@ -105,19 +105,22 @@ for i in range(1,51):
   title_blob = ' '.join(title_lines)
   title_regex = r"<title>\s*(.*)\s*</title>"
   value = re.search(title_regex,title_blob).group(1)
-  print(value)
+  final_title = value
+  print(final_title)
   cover_image_lines = field_hash['cover_image'].value
   cover_image_blob = ' '.join(cover_image_lines)
   cover_image_regex = r"<img[^>]*src=\"(.*)\""
   value = re.search(cover_image_regex,cover_image_blob).group(1)
-  print(value)
+  final_cover_image = value
+  print(final_cover_image)
   quote_list_lines = field_hash['quote_list'].value
   value = []
   for thisline in quote_list_lines:
     linevalue_regex = r"^(.*?)\s*(?:<BR>\s*)?$"
     linevalue = re.search(linevalue_regex,thisline).group(1)
     value.append(linevalue)
-  print(value)
+  final_quote_list = value
+  print(final_quote_list)
   p_list_lines = field_hash['p_list'].value
   p_list_blob = ' '.join(p_list_lines)
   value = []
@@ -127,8 +130,8 @@ for i in range(1,51):
     linevalue = [re.search(linevalue_regex,thislink,re.IGNORECASE).group(1),re.search(linevalue_regex,thislink,re.IGNORECASE).group(2)]
     #linevalue = [[re.search(linevalue_regex,thislink,re.IGNORECASE).group(1)]]
     value.append(linevalue)
-  print(value)
-  #print(p_list_blob)
+  final_p_list = value
+  print(final_p_list)
   includes_list_lines = field_hash['includes_list'].value
   includes_list_blob = ' '.join(includes_list_lines)
   value = []
@@ -136,9 +139,11 @@ for i in range(1,51):
     linevalue_regex = r"^\s*<LI>\s*<A[^>]*HREF=\"(.*?)\"[^>]*>\s*(.*)\s*</A>\s*$"
     linevalue = [re.search(linevalue_regex,thisline).group(1),re.search(linevalue_regex,thisline).group(2)]
     value.append(linevalue)
-  print(value)
+  final_includes_list = value
+  print(final_includes_list)
   sample_page_image_lines = field_hash['sample_page_image'].value
   sample_page_image_blob = ' '.join(sample_page_image_lines)
   sample_page_image_regex = r"<img[^>]*src=\"(.*)\""
   value = re.search(sample_page_image_regex,sample_page_image_blob).group(1)
-  print(value)
+  final_sample_page = value
+  print(final_sample_page)
