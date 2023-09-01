@@ -84,17 +84,6 @@ for i in range(1,51):
       if should_i_skip_rest_of_fields_for_this_line:
         continue
   print("*************")
-#  for thisfield in field_list:
-#    print(thisfield.fieldname)
-#    print(thisfield.value)
-#    if thisfield.inner_regex:
-#      print('Trying to grab the rest')
-#      textblob = ' '.join(thisfield.value)
-#      inner_value = re.search(thisfield.inner_regex,textblob)
-#      if inner_value:
-#        print("inner value: " + inner_value.group(1))
-#    print("*************")
-
 
 # Back to being messy...
 # TODO p_list is hard to parse because links mixed in with non-links and not necessarily consistent for these pages at least.
