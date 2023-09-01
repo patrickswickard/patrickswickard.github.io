@@ -102,9 +102,9 @@ for i in range(1,51):
   for thisfield in field_list:
     field_hash[thisfield.fieldname] = thisfield
   title_lines = field_hash['title'].value
-  titleblob = ' '.join(title_lines)
+  title_blob = ' '.join(title_lines)
   title_regex = r"<title>\s*(.*)\s*</title>"
-  value = re.search(title_regex,titleblob).group(1)
+  value = re.search(title_regex,title_blob).group(1)
   print(value)
   cover_image_lines = field_hash['cover_image'].value
   cover_image_blob = ' '.join(cover_image_lines)
