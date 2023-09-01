@@ -98,22 +98,24 @@ for i in range(1,51):
 
 # Back to being messy...
 # TODO p_list is hard to parse because links mixed in with non-links and not necessarily consistent for these pages at least.
+for i in range(1,51):
   field_hash = {}
+  field_hash[i] = {}
   for thisfield in field_list:
-    field_hash[thisfield.fieldname] = thisfield
-  title_lines = field_hash['title'].value
+    field_hash[i][thisfield.fieldname] = thisfield
+  title_lines = field_hash[i]['title'].value
   title_blob = ' '.join(title_lines)
   title_regex = r"<title>\s*(.*)\s*</title>"
   value = re.search(title_regex,title_blob).group(1)
   final_title = value
   print(final_title)
-  cover_image_lines = field_hash['cover_image'].value
+  cover_image_lines = field_hash[i]['cover_image'].value
   cover_image_blob = ' '.join(cover_image_lines)
   cover_image_regex = r"<img[^>]*src=\"(.*)\""
   value = re.search(cover_image_regex,cover_image_blob).group(1)
   final_cover_image = value
   print(final_cover_image)
-  quote_list_lines = field_hash['quote_list'].value
+  quote_list_lines = field_hash[i]['quote_list'].value
   value = []
   for thisline in quote_list_lines:
     linevalue_regex = r"^(.*?)\s*(?:<BR>\s*)?$"
@@ -121,7 +123,7 @@ for i in range(1,51):
     value.append(linevalue)
   final_quote_list = value
   print(final_quote_list)
-  p_list_lines = field_hash['p_list'].value
+  p_list_lines = field_hash[i]['p_list'].value
   p_list_blob = ' '.join(p_list_lines)
   value = []
   justlinks = re.findall(r"<a href=[^\"]*\"[^\"]*\"[^>]*>[^<]*</a>",p_list_blob,re.IGNORECASE)
@@ -132,7 +134,7 @@ for i in range(1,51):
     value.append(linevalue)
   final_p_list = value
   print(final_p_list)
-  includes_list_lines = field_hash['includes_list'].value
+  includes_list_lines = field_hash[i]['includes_list'].value
   includes_list_blob = ' '.join(includes_list_lines)
   value = []
   for thisline in includes_list_lines:
@@ -141,7 +143,7 @@ for i in range(1,51):
     value.append(linevalue)
   final_includes_list = value
   print(final_includes_list)
-  sample_page_image_lines = field_hash['sample_page_image'].value
+  sample_page_image_lines = field_hash[i]['sample_page_image'].value
   sample_page_image_blob = ' '.join(sample_page_image_lines)
   sample_page_image_regex = r"<img[^>]*src=\"(.*)\""
   value = re.search(sample_page_image_regex,sample_page_image_blob).group(1)
