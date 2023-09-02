@@ -108,7 +108,6 @@ def do_stuff_with_field_hash(field_hash):
   ]
   for i in range(1,51):
     for this_fieldname in fieldname_list:
-#    this_fieldname = 'title'
       if this_fieldname == 'title':
         field_value_hash[i] = {}
         thisfield_lines = field_hash[i][this_fieldname].value
@@ -118,7 +117,6 @@ def do_stuff_with_field_hash(field_hash):
         final_title = this_value
         field_value_hash[i][this_fieldname] = final_title
       #######################
-#    this_fieldname = 'cover_image'
       if this_fieldname == 'cover_image':
         thisfield_lines = field_hash[i][this_fieldname].value
         thisfield_blob = ' '.join(thisfield_lines)
@@ -127,7 +125,6 @@ def do_stuff_with_field_hash(field_hash):
         final_cover_image = this_value
         field_value_hash[i][this_fieldname] = final_cover_image
       #######################
-#    this_fieldname = 'quote_list'
       if this_fieldname == 'quote_list':
         thisfield_lines = field_hash[i][this_fieldname].value
         this_value = []
@@ -137,8 +134,7 @@ def do_stuff_with_field_hash(field_hash):
           this_value.append(linevalue)
         final_quote_list = this_value
         field_value_hash[i]['quote_list'] = final_quote_list
-    #######################
-#    this_fieldname = 'p_list'
+      #######################
       if this_fieldname == 'p_list':
         thisfield_lines = field_hash[i][this_fieldname].value
         thisfield_blob = ' '.join(thisfield_lines)
@@ -157,7 +153,6 @@ def do_stuff_with_field_hash(field_hash):
         final_p_list = this_value
         field_value_hash[i][this_fieldname] = final_p_list
     #######################
-#    this_fieldname = 'includes_list'
       if this_fieldname == 'includes_list':
         thisfield_lines = field_hash[i][this_fieldname].value
         thisfield_blob = ' '.join(thisfield_lines)
@@ -175,7 +170,6 @@ def do_stuff_with_field_hash(field_hash):
         final_includes_list = this_value
         field_value_hash[i][this_fieldname] = final_includes_list
     #######################
-#    this_fieldname = 'sample_page_image'
       if this_fieldname == 'sample_page_image':
         thisfield_lines = field_hash[i][this_fieldname].value
         thisfield_blob = ' '.join(thisfield_lines)
