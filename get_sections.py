@@ -131,7 +131,7 @@ def extract_field(this_fieldname,this_page_sections):
       linevalue = thishash
       this_value.append(linevalue)
     return this_value
-#######################
+  #######################
   if this_fieldname == 'includes_list':
     thisfield_lines = this_page_sections[this_fieldname].value
     thisfield_blob = ' '.join(thisfield_lines)
@@ -147,7 +147,7 @@ def extract_field(this_fieldname,this_page_sections):
       linevalue = thishash
       this_value.append(linevalue)
     return this_value
-#######################
+  #######################
   if this_fieldname == 'sample_page_image':
     thisfield_lines = this_page_sections[this_fieldname].value
     thisfield_blob = ' '.join(thisfield_lines)
