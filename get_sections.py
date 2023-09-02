@@ -127,8 +127,13 @@ def do_stuff_with_field_hash(field_hash):
     justlinks = re.findall(r"<a href=[^\"]*\"[^\"]*\"[^>]*>[^<]*</a>",p_list_blob,re.IGNORECASE)
     for thislink in justlinks:
       linevalue_regex = r"<(?:a|A)[^>]*(?:href|HREF)=\"(.*?)\"[^>]*>\s*(.*)\s*</(?:a|A)>"
-      linevalue = [re.search(linevalue_regex,thislink,re.IGNORECASE).group(1),re.search(linevalue_regex,thislink,re.IGNORECASE).group(2)]
-      #linevalue = [[re.search(linevalue_regex,thislink,re.IGNORECASE).group(1)]]
+      thisurl = re.search(linevalue_regex,thislink,re.IGNORECASE).group(1)
+      thistext = re.search(linevalue_regex,thislink,re.IGNORECASE).group(2)
+      thishash = {
+        'url' : thisurl,
+        'text' : thistext,
+      }
+      linevalue = thishash
       value.append(linevalue)
     final_p_list = value
     field_value_hash[i]['p_list'] = final_p_list
@@ -137,8 +142,15 @@ def do_stuff_with_field_hash(field_hash):
     includes_list_blob = ' '.join(includes_list_lines)
     value = []
     for thisline in includes_list_lines:
+      print(thisline)
       linevalue_regex = r"^\s*<LI>\s*<A[^>]*HREF=\"(.*?)\"[^>]*>\s*(.*)\s*</A>\s*$"
-      linevalue = [re.search(linevalue_regex,thisline).group(1),re.search(linevalue_regex,thisline).group(2)]
+      thisurl = re.search(linevalue_regex,thisline,re.IGNORECASE).group(1)
+      thistext = re.search(linevalue_regex,thisline,re.IGNORECASE).group(2)
+      thishash = {
+        'url' : thisurl,
+        'text' : thistext,
+      }
+      linevalue = thishash
       value.append(linevalue)
     final_includes_list = value
     field_value_hash[i]['includes_list'] = final_includes_list
