@@ -99,25 +99,25 @@ def do_stuff_with_field_hash(field_hash):
   for i in range(1,51):
     this_fieldname = 'title'
     field_value_hash[i] = {}
-    title_lines = field_hash[i][this_fieldname].value
-    title_blob = ' '.join(title_lines)
-    title_regex = r"<title>\s*(.*)\s*</title>"
-    this_value = re.search(title_regex,title_blob).group(1)
+    thisfield_lines = field_hash[i][this_fieldname].value
+    thisfield_blob = ' '.join(thisfield_lines)
+    thisfield_regex = r"<title>\s*(.*)\s*</title>"
+    this_value = re.search(thisfield_regex,thisfield_blob).group(1)
     final_title = this_value
     field_value_hash[i][this_fieldname] = final_title
     #######################
     this_fieldname = 'cover_image'
-    cover_image_lines = field_hash[i][this_fieldname].value
-    cover_image_blob = ' '.join(cover_image_lines)
-    cover_image_regex = r"<img[^>]*src=\"(.*)\""
-    this_value = re.search(cover_image_regex,cover_image_blob).group(1)
+    thisfield_lines = field_hash[i][this_fieldname].value
+    thisfield_blob = ' '.join(thisfield_lines)
+    thisfield_regex = r"<img[^>]*src=\"(.*)\""
+    this_value = re.search(thisfield_regex,thisfield_blob).group(1)
     final_cover_image = this_value
     field_value_hash[i][this_fieldname] = final_cover_image
     #######################
     this_fieldname = 'quote_list'
-    quote_list_lines = field_hash[i]['quote_list'].value
+    thisfield_lines = field_hash[i][this_fieldname].value
     this_value = []
-    for thisline in quote_list_lines:
+    for thisline in thisfield_lines:
       linevalue_regex = r"^(.*?)\s*(?:<BR>\s*)?$"
       linevalue = re.search(linevalue_regex,thisline).group(1)
       this_value.append(linevalue)
@@ -125,10 +125,10 @@ def do_stuff_with_field_hash(field_hash):
     field_value_hash[i]['quote_list'] = final_quote_list
     #######################
     this_fieldname = 'p_list'
-    p_list_lines = field_hash[i]['p_list'].value
-    p_list_blob = ' '.join(p_list_lines)
+    thisfield_lines = field_hash[i][this_fieldname].value
+    thisfield_blob = ' '.join(thisfield_lines)
     this_value = []
-    justlinks = re.findall(r"<a href=[^\"]*\"[^\"]*\"[^>]*>[^<]*</a>",p_list_blob,re.IGNORECASE)
+    justlinks = re.findall(r"<a href=[^\"]*\"[^\"]*\"[^>]*>[^<]*</a>",thisfield_blob,re.IGNORECASE)
     for thislink in justlinks:
       linevalue_regex = r"<(?:a|A)[^>]*(?:href|HREF)=\"(.*?)\"[^>]*>\s*(.*)\s*</(?:a|A)>"
       thisurl = re.search(linevalue_regex,thislink,re.IGNORECASE).group(1)
@@ -143,10 +143,10 @@ def do_stuff_with_field_hash(field_hash):
     field_value_hash[i][this_fieldname] = final_p_list
     #######################
     this_fieldname = 'includes_list'
-    includes_list_lines = field_hash[i][this_fieldname].value
-    includes_list_blob = ' '.join(includes_list_lines)
+    thisfield_lines = field_hash[i][this_fieldname].value
+    thisfield_blob = ' '.join(thisfield_lines)
     this_value = []
-    for thisline in includes_list_lines:
+    for thisline in thisfield_lines:
       linevalue_regex = r"^\s*<LI>\s*<A[^>]*HREF=\"(.*?)\"[^>]*>\s*(.*)\s*</A>\s*$"
       thisurl = re.search(linevalue_regex,thisline,re.IGNORECASE).group(1)
       thistext = re.search(linevalue_regex,thisline,re.IGNORECASE).group(2)
@@ -160,10 +160,10 @@ def do_stuff_with_field_hash(field_hash):
     field_value_hash[i][this_fieldname] = final_includes_list
     #######################
     this_fieldname = 'sample_page_image'
-    sample_page_image_lines = field_hash[i][this_fieldname].value
-    sample_page_image_blob = ' '.join(sample_page_image_lines)
-    sample_page_image_regex = r"<img[^>]*src=\"(.*)\""
-    this_value = re.search(sample_page_image_regex,sample_page_image_blob).group(1)
+    thisfield_lines = field_hash[i][this_fieldname].value
+    thisfield_blob = ' '.join(thisfield_lines)
+    thisfield_regex = r"<img[^>]*src=\"(.*)\""
+    this_value = re.search(thisfield_regex,thisfield_blob).group(1)
     final_sample_page = this_value
     field_value_hash[i][this_fieldname] = final_sample_page
   return field_value_hash
