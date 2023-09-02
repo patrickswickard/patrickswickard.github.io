@@ -86,7 +86,6 @@ def get_field_hash():
             break
         if should_i_skip_rest_of_fields_for_this_line:
           continue
-#    print("*************")
     field_hash[i] = {}
     for thisfield in field_list:
       field_hash[i][thisfield.fieldname] = thisfield
@@ -99,7 +98,6 @@ def extract_field(this_fieldname,this_page_sections):
     thisfield_regex = r"<title>\s*(.*)\s*</title>"
     this_value = re.search(thisfield_regex,thisfield_blob).group(1)
     return this_value
-#    field_value_hash[i][this_fieldname] = this_value
   #######################
   if this_fieldname == 'cover_image':
     thisfield_lines = this_page_sections[this_fieldname].value
@@ -107,7 +105,6 @@ def extract_field(this_fieldname,this_page_sections):
     thisfield_regex = r"<img[^>]*src=\"(.*)\""
     this_value = re.search(thisfield_regex,thisfield_blob).group(1)
     return this_value
-#    field_value_hash[i][this_fieldname] = this_value
   #######################
   if this_fieldname == 'quote_list':
     thisfield_lines = this_page_sections[this_fieldname].value
@@ -117,7 +114,6 @@ def extract_field(this_fieldname,this_page_sections):
       linevalue = re.search(linevalue_regex,thisline).group(1)
       this_value.append(linevalue)
     return this_value
-#    field_value_hash[i]['quote_list'] = this_value
   #######################
   if this_fieldname == 'p_list':
     thisfield_lines = this_page_sections[this_fieldname].value
@@ -135,7 +131,6 @@ def extract_field(this_fieldname,this_page_sections):
       linevalue = thishash
       this_value.append(linevalue)
     return this_value
-#    field_value_hash[i][this_fieldname] = this_value
 #######################
   if this_fieldname == 'includes_list':
     thisfield_lines = this_page_sections[this_fieldname].value
@@ -152,7 +147,6 @@ def extract_field(this_fieldname,this_page_sections):
       linevalue = thishash
       this_value.append(linevalue)
     return this_value
-#    field_value_hash[i][this_fieldname] = this_value
 #######################
   if this_fieldname == 'sample_page_image':
     thisfield_lines = this_page_sections[this_fieldname].value
@@ -160,8 +154,8 @@ def extract_field(this_fieldname,this_page_sections):
     thisfield_regex = r"<img[^>]*src=\"(.*)\""
     this_value = re.search(thisfield_regex,thisfield_blob).group(1)
     return this_value
-#    field_value_hash[i][this_fieldname] = this_value
   return None
+
 # Back to being messy...
 # TODO p_list is hard to parse because links mixed in with non-links and not necessarily consistent for these pages at least.
 def do_stuff_with_field_hash(field_hash):
@@ -178,68 +172,6 @@ def do_stuff_with_field_hash(field_hash):
     field_value_hash[i] = {}
     this_page_sections = field_hash[i]
     for this_fieldname in fieldname_list:
-#      if this_fieldname == 'title':
-#        thisfield_lines = this_page_sections[this_fieldname].value
-#        thisfield_blob = ' '.join(thisfield_lines)
-#        thisfield_regex = r"<title>\s*(.*)\s*</title>"
-#        this_value = re.search(thisfield_regex,thisfield_blob).group(1)
-#        field_value_hash[i][this_fieldname] = this_value
-#      #######################
-#      if this_fieldname == 'cover_image':
-#        thisfield_lines = this_page_sections[this_fieldname].value
-#        thisfield_blob = ' '.join(thisfield_lines)
-#        thisfield_regex = r"<img[^>]*src=\"(.*)\""
-#        this_value = re.search(thisfield_regex,thisfield_blob).group(1)
-#        field_value_hash[i][this_fieldname] = this_value
-#      #######################
-#      if this_fieldname == 'quote_list':
-#        thisfield_lines = this_page_sections[this_fieldname].value
-#        this_value = []
-#        for thisline in thisfield_lines:
-#          linevalue_regex = r"^(.*?)\s*(?:<BR>\s*)?$"
-#          linevalue = re.search(linevalue_regex,thisline).group(1)
-#          this_value.append(linevalue)
-#        field_value_hash[i]['quote_list'] = this_value
-#      #######################
-#      if this_fieldname == 'p_list':
-#        thisfield_lines = this_page_sections[this_fieldname].value
-#        thisfield_blob = ' '.join(thisfield_lines)
-#        this_value = []
-#        justlinks = re.findall(r"<a href=[^\"]*\"[^\"]*\"[^>]*>[^<]*</a>",thisfield_blob,re.IGNORECASE)
-#        for thislink in justlinks:
-#          linevalue_regex = r"<(?:a|A)[^>]*(?:href|HREF)=\"(.*?)\"[^>]*>\s*(.*)\s*</(?:a|A)>"
-#          thisurl = re.search(linevalue_regex,thislink,re.IGNORECASE).group(1)
-#          thistext = re.search(linevalue_regex,thislink,re.IGNORECASE).group(2)
-#          thishash = {
-#            'url' : thisurl,
-#            'text' : thistext,
-#          }
-#          linevalue = thishash
-#          this_value.append(linevalue)
-#        field_value_hash[i][this_fieldname] = this_value
-#    #######################
-#      if this_fieldname == 'includes_list':
-#        thisfield_lines = this_page_sections[this_fieldname].value
-#        thisfield_blob = ' '.join(thisfield_lines)
-#        this_value = []
-#        for thisline in thisfield_lines:
-#          linevalue_regex = r"^\s*<LI>\s*<A[^>]*HREF=\"(.*?)\"[^>]*>\s*(.*)\s*</A>\s*$"
-#          thisurl = re.search(linevalue_regex,thisline,re.IGNORECASE).group(1)
-#          thistext = re.search(linevalue_regex,thisline,re.IGNORECASE).group(2)
-#          thishash = {
-#            'url' : thisurl,
-#            'text' : thistext,
-#          }
-#          linevalue = thishash
-#          this_value.append(linevalue)
-#        field_value_hash[i][this_fieldname] = this_value
-#    #######################
-#      if this_fieldname == 'sample_page_image':
-#        thisfield_lines = this_page_sections[this_fieldname].value
-#        thisfield_blob = ' '.join(thisfield_lines)
-#        thisfield_regex = r"<img[^>]*src=\"(.*)\""
-#        this_value = re.search(thisfield_regex,thisfield_blob).group(1)
-#        field_value_hash[i][this_fieldname] = this_value
       this_value = extract_field(this_fieldname,this_page_sections)
       field_value_hash[i][this_fieldname] = this_value
   return field_value_hash
