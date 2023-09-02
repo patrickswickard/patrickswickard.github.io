@@ -107,10 +107,10 @@ def do_stuff_with_field_hash(field_hash):
     'sample_page_image',
   ]
   for i in range(1,51):
+    field_value_hash[i] = {}
     this_page_sections = field_hash[i]
     for this_fieldname in fieldname_list:
       if this_fieldname == 'title':
-        field_value_hash[i] = {}
         thisfield_lines = this_page_sections[this_fieldname].value
         thisfield_blob = ' '.join(thisfield_lines)
         thisfield_regex = r"<title>\s*(.*)\s*</title>"
