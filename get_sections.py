@@ -97,19 +97,24 @@ def get_field_hash():
 def do_stuff_with_field_hash(field_hash):
   field_value_hash = {}
   for i in range(1,51):
+    this_fieldname = 'title'
     field_value_hash[i] = {}
-    title_lines = field_hash[i]['title'].value
+    title_lines = field_hash[i][this_fieldname].value
     title_blob = ' '.join(title_lines)
     title_regex = r"<title>\s*(.*)\s*</title>"
     value = re.search(title_regex,title_blob).group(1)
     final_title = value
-    field_value_hash[i]['title'] = final_title
-    cover_image_lines = field_hash[i]['cover_image'].value
+    field_value_hash[i][this_fieldname] = final_title
+    #######################
+    this_fieldname = 'cover_image'
+    cover_image_lines = field_hash[i][this_fieldname].value
     cover_image_blob = ' '.join(cover_image_lines)
     cover_image_regex = r"<img[^>]*src=\"(.*)\""
     value = re.search(cover_image_regex,cover_image_blob).group(1)
     final_cover_image = value
-    field_value_hash[i]['cover_image'] = final_cover_image
+    field_value_hash[i][this_fieldname] = final_cover_image
+    #######################
+    this_fieldname = 'quote_list'
     quote_list_lines = field_hash[i]['quote_list'].value
     value = []
     for thisline in quote_list_lines:
@@ -118,6 +123,8 @@ def do_stuff_with_field_hash(field_hash):
       value.append(linevalue)
     final_quote_list = value
     field_value_hash[i]['quote_list'] = final_quote_list
+    #######################
+    this_fieldname = 'p_list'
     p_list_lines = field_hash[i]['p_list'].value
     p_list_blob = ' '.join(p_list_lines)
     value = []
@@ -133,8 +140,10 @@ def do_stuff_with_field_hash(field_hash):
       linevalue = thishash
       value.append(linevalue)
     final_p_list = value
-    field_value_hash[i]['p_list'] = final_p_list
-    includes_list_lines = field_hash[i]['includes_list'].value
+    field_value_hash[i][this_fieldname] = final_p_list
+    #######################
+    this_fieldname = 'includes_list'
+    includes_list_lines = field_hash[i][this_fieldname].value
     includes_list_blob = ' '.join(includes_list_lines)
     value = []
     for thisline in includes_list_lines:
@@ -148,13 +157,15 @@ def do_stuff_with_field_hash(field_hash):
       linevalue = thishash
       value.append(linevalue)
     final_includes_list = value
-    field_value_hash[i]['includes_list'] = final_includes_list
-    sample_page_image_lines = field_hash[i]['sample_page_image'].value
+    field_value_hash[i][this_fieldname] = final_includes_list
+    #######################
+    this_fieldname = 'sample_page_image'
+    sample_page_image_lines = field_hash[i][this_fieldname].value
     sample_page_image_blob = ' '.join(sample_page_image_lines)
     sample_page_image_regex = r"<img[^>]*src=\"(.*)\""
     value = re.search(sample_page_image_regex,sample_page_image_blob).group(1)
     final_sample_page = value
-    field_value_hash[i]['sample_page'] = final_sample_page
+    field_value_hash[i][this_fieldname] = final_sample_page
   return field_value_hash
 
 field_hash = get_field_hash()
