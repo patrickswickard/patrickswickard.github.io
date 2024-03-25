@@ -13,8 +13,8 @@ with open("gallerylist.csv",'r') as gallery_file:
 
 #print('hi')
 #print(df)
-print(df.index)
-print(df.columns)
+#print(df.index)
+#print(df.columns)
 
 for index,row in df.iterrows():
-    print('<a href="' + str(row['url']) + '">' + row['Name'] + '</a> - ' + str(row['Address']) + '<br>')
+    print('<a href="' + str(row['url']) + '">' + row['Name'] + '</a> - ' + str(row['Address']) + ' | ' + str(row['Artists']) + ' | ' + str(row['Artist Notes']) + '<br>')
