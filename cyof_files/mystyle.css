@@ -1,0 +1,16 @@
+body {
+  background-color: white;
+}
+
+html {
+  color: black;
+  margin-left: 0px;
+  font-size: 1em;
+  width: min(1000px, 100vw)
+}
+
+h2 {
+  color: black;
+  margin-left; 0px
+  font-size: 2em;
+}
