@@ -5,4 +5,6 @@ This is not the 1988 Terry Gilliam film, but rather the Nazi-era 1943 German fil
 <P>
 You think fondly back on the Terry Gilliam film, which was your first exposure to Uma Thurman, who played Venus. She was heavily featured in the advertising for the film, standing nude on a shell (with her naughty bits modestly covered by her hands) as portrayed in the famous Botticelli painting. This turned you into auite a junior art appreciator.
 <P>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1fbD0btGvBE?si=i45NYwkLlUQpR6yt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<P>
 Venus' long red hair was featured on the cover of one of your favorite grad school textbooks, Papadimitriou's <I>Computational Complexity</I>. The front cover had just her tangled tresses, and if you flipped the book over you were staring into her dreamy heavy-lidded eyes--which you did quite often when you'd get bored or distracted in class. You'd fantasize about lying on a pillow next to her as she explained P vs NP and the ways in which various complexity classes nested inside each other as you would drift off to sleep.
